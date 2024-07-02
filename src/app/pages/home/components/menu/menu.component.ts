@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { RoutesConfig } from '../../../../shared/helpers/routes.config';
 import { MENU_ITEMS, MenuItem } from './menu.config';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { IUserModel } from '../../../../shared/services/users/model/user.model';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgForOf],
+  imports: [RouterLink, RouterLinkActive, NgForOf, NgIf],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

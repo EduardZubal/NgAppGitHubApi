@@ -4,16 +4,14 @@ import { CanActivateFn, Router } from '@angular/router';
 import { RoutesConfig } from '../helpers/routes.config';
 import { AuthService } from '../services/auth/auth.service';
 
-export const RootGuard: CanActivateFn = async (route, state) => {
+export const AuthGuard: CanActivateFn = async (route, state) => {
     const auth = inject(AuthService);
     const router = inject(Router);
 
-    await auth.checkIfSignInWithEmailLink();
-
-    if (auth.isUserLogged()) {
+    if (!auth.isUserLogged()) {
         return true;
     }
 
-    void router.navigate([RoutesConfig.auth]);
+    void router.navigate([RoutesConfig.blocksPage]);
     return false;
 };

@@ -2,6 +2,7 @@ export interface IUserModel {
     login: string;
     name: string;
     photoURL: string;
+    email: string;
     displayName: string;
     avatar_url: string;
     type: string;

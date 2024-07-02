@@ -5,13 +5,13 @@ import { Router } from "@angular/router";
 import { IUserModel } from "../users/model/user.model";
 
 const STOREG_KEY = 'GithubAuthUserTest';
+const STOREG_KEY_EMAIL = 'emailForSignIn';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-
-    private _fireAuth = inject(Auth);
+    private _firebaseAuth = inject(Auth);
 
     public isUserLogged(): boolean {
         return !!localStorage.getItem(STOREG_KEY);
@@ -26,7 +26,7 @@ export class AuthService {
     public signInGithubAuth() {
         const provider = new GithubAuthProvider();
         provider.addScope('repo');
-        signInWithPopup(this._fireAuth, provider)
+        signInWithPopup(this._firebaseAuth, provider)
             .then((result) => {
                 localStorage.setItem(STOREG_KEY, JSON.stringify(result?.user));
                 void this._router.navigateByUrl(RoutesConfig.root);
@@ -42,8 +42,8 @@ export class AuthService {
         };
 
         try {
-            await sendSignInLinkToEmail(this._fireAuth, email, actionCodeSettings);
-            localStorage.setItem('emailForSignIn', email);
+            await sendSignInLinkToEmail(this._firebaseAuth, email, actionCodeSettings);
+            localStorage.setItem(STOREG_KEY_EMAIL, email);
             return true;
         } catch (error) {
             console.error(error);
@@ -52,18 +52,18 @@ export class AuthService {
     }
 
     public async checkIfSignInWithEmailLink(): Promise<boolean> {
-        const email = localStorage.getItem('emailForSignIn') || '';
-        if (isSignInWithEmailLink(this._fireAuth, window.location.href)) {
-            const result = await signInWithEmailLink(this._fireAuth, email, window.location.href);
+        const email = localStorage.getItem(STOREG_KEY_EMAIL) || '';
+        if (isSignInWithEmailLink(this._firebaseAuth, window.location.href)) {
+            const result = await signInWithEmailLink(this._firebaseAuth, email, window.location.href);
             localStorage.setItem(STOREG_KEY, JSON.stringify(result?.user));
-            localStorage.removeItem('emailForSignIn');
+            localStorage.removeItem(STOREG_KEY_EMAIL);
             return true;
         }
         return false;
     }
 
     public async signOut(): Promise<void> {
-        await this._fireAuth.signOut();
+        await this._firebaseAuth.signOut();
         localStorage.removeItem(STOREG_KEY);
         this._router.navigateByUrl(RoutesConfig.auth);
     }
