@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary mb-4">
+<nav class="navbar bg-body-tertiary mb-4">
     <div class="container-fluid">
         <a class="navbar-brand">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -8,19 +8,26 @@
             </svg>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <ul class="navbar-nav me-auto mb-lg-0 d-flex flex-row">
+            <li *ngFor="let item of menu" class="me-3">
+                <a class="nav-link" [routerLink]="item.routerLink" [routerLinkActive]="'active'">
+                    {{ item.label }}
+                </a>
+            </li>
+        </ul>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-lg-0">
-                <li *ngFor="let item of menu">
-                    <a class="nav-link" [routerLink]="item.routerLink" [routerLinkActive]="'active'">
-                        {{ item.label }}
-                    </a>
-                </li>
-            </ul>
+        <div class="dropdown">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                data-bs-auto-close="outside">
+                <img class="avatar object-fit-fill border rounded me-2" [src]="user?.photoURL" alt="avatar">
+                <span>{{ user?.displayName }}</span>
+            </button>
+            <form class="dropdown-menu p-4 dropdown-menu-end">
+                <button type="button" class="btn btn-primary" (click)="signOut()">
+                    Sign out
+                </button>
+            </form>
         </div>
+
     </div>
 </nav>

@@ -9,7 +9,6 @@ export const ROUTES: Routes = [
         children: [
             {
                 path: '',
-                // canActivate: [itemsGuard],
                 children: [
                     {
                         path: '',
