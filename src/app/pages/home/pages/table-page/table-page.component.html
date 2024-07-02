@@ -1,0 +1,27 @@
+<section class="section-table">
+    <app-search-field (onSubmitEmit)="onSearch($event)"></app-search-field>
+
+    <ng-container *ngIf="(list$ | async) as list">
+        <table class="table mt-3" *ngIf="list.length else NoData">
+            <thead>
+                <tr>
+                    <th scope="col">Avatar</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of list" (click)="navigateToDetail(item.login)">
+                    <td><img class="avatar object-fit-fill border rounded" [src]="item.avatar_url" alt="avatar"></td>
+                    <td>{{ item.login }}</td>
+                    <td>{{ item.type }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <ng-template #NoData>
+        <div class="w-100 text-center mt-4">No Data for Table page</div>
+    </ng-template>
+</section>

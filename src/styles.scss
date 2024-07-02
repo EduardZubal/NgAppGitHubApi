@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import "assets/styles/common-variables";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Helvetica', sans-serif;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+}

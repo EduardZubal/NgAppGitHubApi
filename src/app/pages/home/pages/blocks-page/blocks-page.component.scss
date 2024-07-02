@@ -1,0 +1,15 @@
+:host {
+    .avatar {
+        width: 100%;
+        max-width: 50px;
+        margin-right: 15px;
+    }
+
+    li {
+        cursor: pointer;
+
+        &:hover {
+            background: var(--aliceblue);
+        }
+    }
+}

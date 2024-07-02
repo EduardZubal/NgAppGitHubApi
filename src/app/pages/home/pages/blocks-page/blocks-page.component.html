@@ -1,0 +1,19 @@
+<section class="section-blocks">
+    <app-search-field (onSubmitEmit)="onSearch($event)"></app-search-field>
+
+    <ng-container *ngIf="(list$ | async) as list">
+        <ul class="list-group mt-3" *ngIf="list.length else NoData">
+            <li class="list-group-item" *ngFor="let item of list" (click)="navigateToDetail(item.login)">
+                <a class="link-opacity-100">
+                    <img class="avatar object-fit-fill border rounded" [src]="item.avatar_url" alt="avatar">
+                    <span>{{ item.login }}</span>
+                </a>
+            </li>
+        </ul>
+    </ng-container>
+
+
+    <ng-template #NoData>
+        <div class="w-100 text-center mt-4">No Data for Block page</div>
+    </ng-template>
+</section>

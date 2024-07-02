@@ -1,0 +1,17 @@
+<form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+        [formControl]="searchControl">
+    <button
+        class="btn btn-outline-success"
+        type="button"
+        [disabled]="!searchControl.valid"
+        (click)="onSubmit()"
+        >
+        <span *ngIf="!(loaderService.loader$ | async)">Search</span>
+
+        <ng-container *ngIf="loaderService.loader$ | async">
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status">Loading...</span>
+        </ng-container>
+    </button>
+</form>
