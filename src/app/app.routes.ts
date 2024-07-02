@@ -9,10 +9,10 @@ export const routes: Routes = [
         canActivate: [RootGuard],
         loadChildren: () => import('./pages/home/home.routes').then((mod) => mod.ROUTES),
     },
-    // {
-    //     path: RoutesConfig.auth,
-    //     loadChildren: () => import('./pages/auth/auth.routes').then((mod) => mod.ROUTES),
-    // },
+    {
+        path: RoutesConfig.auth,
+        loadComponent: () => import('./pages/auth/auth.component').then((c) => c.AuthComponent),
+    },
     {
         path: '**',
         pathMatch: 'full',

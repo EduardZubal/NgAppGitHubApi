@@ -6,6 +6,4 @@ export class RoutesConfig {
     static blocksPage = 'blocks';
     static tablePage = 'table';
     static detailPage = 'detail';
-
-    static loginNavigate = `/${RoutesConfig.auth}/${RoutesConfig.login}`;
 }

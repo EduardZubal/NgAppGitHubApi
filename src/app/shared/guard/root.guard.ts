@@ -13,8 +13,8 @@ export const RootGuard: CanActivateFn = (route, state) => {
         map((isLogged) => {
             if (isLogged) return true;
 
-            // void router.navigate([RoutesConfig.loginNavigate]);
-            return true;
+            void router.navigate([RoutesConfig.auth]);
+            return false;
         })
     );
 };
