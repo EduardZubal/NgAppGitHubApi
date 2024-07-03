@@ -43,7 +43,7 @@
                         [disabled]="!emailControl.valid"
                         (click)="signInWithEmail()">Login</button>
 
-                    <div class="alert alert-info w-100 mt-3" role="alert" [hidden]="isAlertHidden">
+                    <div class="alert alert-info w-100 mt-3" role="alert" [hidden]="!showAlert">
                         Letter sent! Please check your email.
                     </div>
                 </form>
@@ -52,11 +52,11 @@
     </div>
 </section>
 
-<div class="toast align-items-center position-absolute top-0" [class.show]="!isToastHidden" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast align-items-center position-absolute top-0" [class.show]="showError" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
         <div class="toast-body">
-            Some problem happened!
+            {{ errorMsg }}
         </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" (click)="showError = false"></button>
     </div>
 </div>

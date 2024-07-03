@@ -35,20 +35,14 @@ export class AuthService {
             });
     }
 
-    public async signInWithEmail(email: string): Promise<boolean> {
+    public async signInWithEmail(email: string): Promise<void> {
         const actionCodeSettings = {
             url: 'http://localhost:4200',
             handleCodeInApp: true,
         };
 
-        try {
-            await sendSignInLinkToEmail(this._firebaseAuth, email, actionCodeSettings);
-            localStorage.setItem(STOREG_KEY_EMAIL, email);
-            return true;
-        } catch (error) {
-            console.error(error);
-            return false
-        }
+        await sendSignInLinkToEmail(this._firebaseAuth, email, actionCodeSettings);
+        localStorage.setItem(STOREG_KEY_EMAIL, email);
     }
 
     public async checkIfSignInWithEmailLink(): Promise<boolean> {

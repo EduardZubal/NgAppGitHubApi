@@ -14,8 +14,9 @@ import { EMAIL_PATTERN } from '../../shared/helpers/constants';
 export class AuthComponent {
     public emailControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_PATTERN)]);
 
-    public isAlertHidden = true;
-    public isToastHidden = true;
+    public showAlert = false;
+    public showError= false;
+    public errorMsg: string = '';
 
     constructor(private _authService: AuthService ) {}
 
@@ -25,9 +26,13 @@ export class AuthComponent {
 
     public async signInWithEmail() {
         if (this.emailControl.value?.trim()) {
-            const result = await this._authService.signInWithEmail(this.emailControl.value);
-            this.isAlertHidden = !result;
-            this.isToastHidden = result;
+            try {
+                await this._authService.signInWithEmail(this.emailControl.value);
+                this.showAlert = true;
+            } catch (error) {
+                this.errorMsg = error as string;
+                this.showError = true;
+            }
         }
     }
 }
