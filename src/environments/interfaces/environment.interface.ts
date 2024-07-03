@@ -1,8 +1,8 @@
 
-type modeTypes = 'dev' | 'prod' | 'stage';
+type ModeTypes = 'dev' | 'prod' | 'stage';
 
 export interface IEnvironment {
   production: boolean;
-  environmentMode: modeTypes,
+  environmentMode: ModeTypes,
   apiV1: string;
 }
